@@ -20,31 +20,11 @@ public class Team {
     private String match5one;
     private String match5two;
     private String match5three;
-    private boolean rank1One;
-    private boolean rank1Two;
-    private boolean rank1Three;
-    private boolean rank1Four;
-    private boolean rank1Five;
-    private boolean rank2One;
-    private boolean rank2Two;
-    private boolean rank2Three;
-    private boolean rank2Four;
-    private boolean rank2Five;
-    private boolean rank3One;
-    private boolean rank3Two;
-    private boolean rank3Three;
-    private boolean rank3Four;
-    private boolean rank3Five;
-    private boolean rank4One;
-    private boolean rank4Two;
-    private boolean rank4Three;
-    private boolean rank4Four;
-    private boolean rank4Five;
-    private boolean rank5One;
-    private boolean rank5Two;
-    private boolean rank5Three;
-    private boolean rank5Four;
-    private boolean rank5Five;
+    private int match1Rank = 3;
+    private int match2Rank = 3;
+    private int match3Rank = 3;
+    private int match4Rank = 3;
+    private int match5Rank = 3;
 
 
 
@@ -192,205 +172,46 @@ public class Team {
         this.match5three = match5three;
     }
 
-    public boolean getRank1One(){
-        return rank1One;
+    public int getMatch1Rank() {
+        return match1Rank;
     }
 
-    public void setRank1One(boolean rank1One) {
-        this.rank1One = rank1One;
+    public void setMatch1Rank(int match1Rank) {
+        this.match1Rank = match1Rank;
     }
 
-    public boolean getRank1Two() {
-        return rank1Two;
+    public int getMatch2Rank() {
+        return match2Rank;
     }
 
-    public void setRank1Two(boolean rank1Two) {
-        this.rank1Two = rank1Two;
+    public void setMatch2Rank(int match2Rank){
+        this.match2Rank = match2Rank;
     }
 
-    public boolean getRank1Three() {
-        return rank1Three;
+    public int getMatch3Rank() {
+        return match3Rank;
     }
 
-    public void setRank1Three(boolean rank1Three) {
-        this.rank1Three = rank1Three;
+    public void setMatch3Rank(int match2Rank) {
+        this.match3Rank = match3Rank;
     }
 
-    public boolean getRank1Four() {
-        return rank1Four;
+    public int getMatch4Rank() {
+        return match4Rank;
     }
 
-    public void setRank1Four(boolean rank1Four) {
-        this.rank1Four = rank1Four;
+    public void setMatch4Rank(int match4Rank) {
+        this.match4Rank = match4Rank;
     }
 
-    public boolean getRank1Five() {
-        return rank1Five;
+    public int getMatch5Rank() {
+        return match5Rank;
     }
 
-    public void setRank1Five(boolean rank1Five) {
-        this.rank1Five = rank1Five;
+    public void setMatch5Rank(int match5Rank) {
+        this.match5Rank = match5Rank;
     }
 
-    public boolean getRank2One() {
-        return rank2One;
-    }
-
-    public void setRank2One(boolean rank2One) {
-        this.rank2One = rank2One;
-    }
-
-    public boolean getRank2Two() {
-        return rank2Two;
-    }
-
-    public void setRank2Two(boolean rank2Two) {
-        this.rank2Two = rank2Two;
-    }
-
-    public boolean getRank2Three() {
-        return rank2Three;
-    }
-
-    public void setRank2Three(boolean rank2Three) {
-        this.rank2Three = rank2Three;
-    }
-
-    public boolean getRank2Four() {
-        return rank2Four;
-    }
-
-    public void setRank2Four(boolean rank2Four) {
-        this.rank2Four = rank2Four;
-    }
-
-    public boolean getRank2Five() {
-        return rank2Five;
-    }
-
-    public void setRank2Five(boolean rank2Five) {
-        this.rank2Five = rank2Five;
-    }
-
-    public boolean getRank3One(){
-        return rank3One;
-    }
-
-    public void setRank3One(boolean rank3One) {
-        this.rank3One = rank3One;
-    }
-
-    public boolean getRank3Two() {
-        return rank3Two;
-    }
-
-    public void setRank3Two(boolean rank3Two) {
-        this.rank3Two = rank3Two;
-    }
-
-    public boolean getRank3Three() {
-        return rank3Three;
-    }
-
-    public void setRank3Three(boolean rank3Three) {
-        this.rank3Three = rank3Three;
-    }
-
-    public boolean getRank3Four() {
-        return rank3Four;
-    }
-
-    public void setRank3Four(boolean rank3Four) {
-        this.rank3Four = rank3Four;
-    }
-
-    public boolean getRank3Five() {
-        return rank3Five;
-    }
-
-    public void setRank3Five(boolean rank3Five) {
-        this.rank3Five = rank3Five;
-    }
-
-    public boolean getRank4One() {
-        return rank4One;
-    }
-
-    public void setRank4One(boolean rank4One) {
-        this.rank4One = rank4One;
-    }
-
-    public boolean getRank4Two() {
-        return rank4Two;
-    }
-
-    public void setRank4Two(boolean rank4Two) {
-        this.rank4Two = rank4Two;
-    }
-
-    public boolean getRank4Three() {
-        return rank4Three;
-    }
-
-    public void setRank4Three(boolean rank4Three) {
-        this.rank4Three = rank4Three;
-    }
-
-    public boolean getRank4Four() {
-        return rank4Four;
-    }
-
-    public void setRank4Four(boolean rank4Four) {
-        this.rank4Four = rank4Four;
-    }
-
-    public boolean getRank4Five() {
-        return rank4Five;
-    }
-
-    public void setRank4Five(boolean rank4Five) {
-        this.rank4Five = rank4Five;
-    }
-
-    public boolean getRank5One() {
-        return rank5One;
-    }
-
-    public void setRank5One(boolean rank5One) {
-        this.rank5One = rank5One;
-    }
-
-    public boolean getRank5Two() {
-        return rank5Two;
-    }
-
-    public void setRank5Two(boolean rank5Two) {
-        this.rank5Two = rank5Two;
-    }
-
-    public boolean getRank5Three() {
-        return rank5Three;
-    }
-
-    public void setRank5Three(boolean rank5Three) {
-        this.rank5Three = rank5Three;
-    }
-
-    public boolean getRank5Four() {
-        return rank5Four;
-    }
-
-    public void setRank5Four(boolean rank5Four) {
-        this.rank5Four = rank5Four;
-    }
-
-    public boolean getRank5Five() {
-        return rank5Five;
-    }
-
-    public void setRank5Five(boolean rank5Five) {
-        this.rank5Five = rank5Five;
-    }
 }
 
 

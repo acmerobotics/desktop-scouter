@@ -35,43 +35,44 @@ public class Main extends Application {
     private TextArea textAreaMatch1One;
     private TextArea textAreaMatch1Two;
     private TextArea textAreaMatch1Three;
-    private CheckBox rankMatch1One;
-    private CheckBox rankMatch1Two;
-    private CheckBox rankMatch1Three;
-    private CheckBox rankMatch1Four;
-    private CheckBox rankMatch1Five;
+    private ToggleGroup rankingMatch1;
+    private List<RadioButton> rankMatch1 = new ArrayList<>();
     private TextArea textAreaMatch2One;
     private TextArea textAreaMatch2Two;
     private TextArea textAreaMatch2Three;
-    private CheckBox rankMatch2One;
-    private CheckBox rankMatch2Two;
-    private CheckBox rankMatch2Three;
-    private CheckBox rankMatch2Four;
-    private CheckBox rankMatch2Five;
+    private ToggleGroup rankingMatch2;
+    private RadioButton rankMatch2One;
+    private RadioButton rankMatch2Two;
+    private RadioButton rankMatch2Three;
+    private RadioButton rankMatch2Four;
+    private RadioButton rankMatch2Five;
     private TextArea textAreaMatch3One;
     private TextArea textAreaMatch3Two;
     private TextArea textAreaMatch3Three;
-    private CheckBox rankMatch3One;
-    private CheckBox rankMatch3Two;
-    private CheckBox rankMatch3Three;
-    private CheckBox rankMatch3Four;
-    private CheckBox rankMatch3Five;
+    private ToggleGroup rankingMatch3;
+    private RadioButton rankMatch3One;
+    private RadioButton rankMatch3Two;
+    private RadioButton rankMatch3Three;
+    private RadioButton rankMatch3Four;
+    private RadioButton rankMatch3Five;
     private TextArea textAreaMatch4One;
     private TextArea textAreaMatch4Two;
     private TextArea textAreaMatch4Three;
-    private CheckBox rankMatch4One;
-    private CheckBox rankMatch4Two;
-    private CheckBox rankMatch4Three;
-    private CheckBox rankMatch4Four;
-    private CheckBox rankMatch4Five;
+    private ToggleGroup rankingMatch4;
+    private RadioButton rankMatch4One;
+    private RadioButton rankMatch4Two;
+    private RadioButton rankMatch4Three;
+    private RadioButton rankMatch4Four;
+    private RadioButton rankMatch4Five;
     private TextArea textAreaMatch5One;
     private TextArea textAreaMatch5Two;
     private TextArea textAreaMatch5Three;
-    private CheckBox rankMatch5One;
-    private CheckBox rankMatch5Two;
-    private CheckBox rankMatch5Three;
-    private CheckBox rankMatch5Four;
-    private CheckBox rankMatch5Five;
+    private ToggleGroup rankingMatch5;
+    private RadioButton rankMatch5One;
+    private RadioButton rankMatch5Two;
+    private RadioButton rankMatch5Three;
+    private RadioButton rankMatch5Four;
+    private RadioButton rankMatch5Five;
 
 
 
@@ -184,32 +185,8 @@ public class Main extends Application {
                 selectedTeam.setMatch5one(textAreaMatch5One.getText());
                 selectedTeam.setMatch5two(textAreaMatch5Two.getText());
                 selectedTeam.setMatch5three(textAreaMatch5Three.getText());
-                selectedTeam.setRank1One(rankMatch1One.isSelected());
-                selectedTeam.setRank1Two(rankMatch1Two.isSelected());
-                selectedTeam.setRank1Three(rankMatch1Three.isSelected());
-                selectedTeam.setRank1Four(rankMatch1Four.isSelected());
-                selectedTeam.setRank1Five(rankMatch1Five.isSelected());
-                selectedTeam.setRank2One(rankMatch2One.isSelected());
-                selectedTeam.setRank2Two(rankMatch2Two.isSelected());
-                selectedTeam.setRank2Three(rankMatch2Three.isSelected());
-                selectedTeam.setRank2Four(rankMatch2Four.isSelected());
-                selectedTeam.setRank2Five(rankMatch2Five.isSelected());
-                selectedTeam.setRank3One(rankMatch3One.isSelected());
-                selectedTeam.setRank3Two(rankMatch3Two.isSelected());
-                selectedTeam.setRank3Three(rankMatch3Three.isSelected());
-                selectedTeam.setRank3Four(rankMatch3Four.isSelected());
-                selectedTeam.setRank3Five(rankMatch3Five.isSelected());
-                selectedTeam.setRank4One(rankMatch4One.isSelected());
-                selectedTeam.setRank4Two(rankMatch4Two.isSelected());
-                selectedTeam.setRank4Three(rankMatch4Three.isSelected());
-                selectedTeam.setRank4Four(rankMatch4Four.isSelected());
-                selectedTeam.setRank4Five(rankMatch4Five.isSelected());
-                selectedTeam.setRank5One(rankMatch5One.isSelected());
-                selectedTeam.setRank5Two(rankMatch5Two.isSelected());
-                selectedTeam.setRank5Three(rankMatch5Three.isSelected());
-                selectedTeam.setRank5Four(rankMatch5Four.isSelected());
-                selectedTeam.setRank5Five(rankMatch5Five.isSelected());
-
+                int index = rankMatch1.indexOf(rankingMatch1.getSelectedToggle());
+                selectedTeam.setMatch1Rank(index+1);
             }
 
             primaryStage.setScene(scene1);
@@ -422,109 +399,127 @@ public class Main extends Application {
         GridPane.setRowIndex(ml5, 14);
         GridPane.setColumnIndex(ml5, 0);
 
-        // CheckBoxes for Rankings
+        // RadioButtons for Rankings
 
-        rankMatch1One = new CheckBox("1");
-        GridPane.setRowIndex(rankMatch1One, 4);
-        GridPane.setColumnIndex(rankMatch1One,3);
+        rankingMatch1 = new ToggleGroup();
+        for (int i = 0; i < 5; i++) {
+            RadioButton button = new RadioButton(Integer.toString(i + 1));
+            button.setToggleGroup(rankingMatch1);
+            GridPane.setRowIndex(button, 4);
+            GridPane.setColumnIndex(button, i + 3);
+            grid.getChildren().add(button);
+            rankMatch1.add(button);
+        }
 
-        rankMatch1Two = new CheckBox("2");
-        GridPane.setRowIndex(rankMatch1Two, 4);
-        GridPane.setColumnIndex(rankMatch1Two, 4);
+        rankingMatch2 = new ToggleGroup();
 
-        rankMatch1Three = new CheckBox("3");
-        GridPane.setRowIndex(rankMatch1Three, 4);
-        GridPane.setColumnIndex(rankMatch1Three, 5);
-
-        rankMatch1Four = new CheckBox("4");
-        GridPane.setRowIndex(rankMatch1Four, 4);
-        GridPane.setColumnIndex(rankMatch1Four, 6);
-
-        rankMatch1Five = new CheckBox("5");
-        GridPane.setRowIndex(rankMatch1Five, 4);
-        GridPane.setColumnIndex(rankMatch1Five, 7);
-
-        rankMatch2One = new CheckBox("1");
+        rankMatch2One = new RadioButton("1");
+        rankMatch2One.setToggleGroup(rankingMatch2);
         GridPane.setRowIndex(rankMatch2One, 7);
         GridPane.setColumnIndex(rankMatch2One, 3);
 
-        rankMatch2Two = new CheckBox("2");
+        rankMatch2Two = new RadioButton("2");
+        rankMatch2Two.setToggleGroup(rankingMatch2);
         GridPane.setRowIndex(rankMatch2Two, 7);
         GridPane.setColumnIndex(rankMatch2Two, 4);
 
-        rankMatch2Three = new CheckBox("3");
+        rankMatch2Three = new RadioButton("3");
+        rankMatch2Three.setToggleGroup(rankingMatch2);
         GridPane.setRowIndex(rankMatch2Three, 7);
         GridPane.setColumnIndex(rankMatch2Three, 5);
 
-        rankMatch2Four = new CheckBox("4");
+        rankMatch2Four = new RadioButton("4");
+        rankMatch2Four.setToggleGroup(rankingMatch2);
         GridPane.setRowIndex(rankMatch2Four, 7);
         GridPane.setColumnIndex(rankMatch2Four, 6);
 
-        rankMatch2Five = new CheckBox("5");
+        rankMatch2Five = new RadioButton("5");
+        rankMatch2Five.setToggleGroup(rankingMatch2);
         GridPane.setRowIndex(rankMatch2Five, 7);
         GridPane.setColumnIndex(rankMatch2Five, 7);
 
-        rankMatch3One = new CheckBox("1");
+        rankingMatch3 = new ToggleGroup();
+
+        rankMatch3One = new RadioButton("1");
+        rankMatch3One.setToggleGroup(rankingMatch3);
         GridPane.setRowIndex(rankMatch3One, 10);
         GridPane.setColumnIndex(rankMatch3One, 3);
 
-        rankMatch3Two = new CheckBox("2");
+        rankMatch3Two = new RadioButton("2");
+        rankMatch3Two.setToggleGroup(rankingMatch3);
         GridPane.setRowIndex(rankMatch3Two, 10);
         GridPane.setColumnIndex(rankMatch3Two, 4);
 
-        rankMatch3Three = new CheckBox("3");
+        rankMatch3Three = new RadioButton("3");
+        rankMatch3Three.setToggleGroup(rankingMatch3);
         GridPane.setRowIndex(rankMatch3Three, 10);
         GridPane.setColumnIndex(rankMatch3Three, 5);
 
-        rankMatch3Four = new CheckBox("4");
+        rankMatch3Four = new RadioButton("4");
+        rankMatch3Four.setToggleGroup(rankingMatch3);
         GridPane.setRowIndex(rankMatch3Four, 10);
         GridPane.setColumnIndex(rankMatch3Four, 6);
 
-        rankMatch3Five = new CheckBox("5");
+        rankMatch3Five = new RadioButton("5");
+        rankMatch3Five.setToggleGroup(rankingMatch3);
         GridPane.setRowIndex(rankMatch3Five, 10);
         GridPane.setColumnIndex(rankMatch3Five, 7);
 
-        rankMatch4One = new CheckBox("1");
+        rankingMatch4 = new ToggleGroup();
+
+        rankMatch4One = new RadioButton("1");
+        rankMatch4One.setToggleGroup(rankingMatch4);
         GridPane.setRowIndex(rankMatch4One, 13);
         GridPane.setColumnIndex(rankMatch4One, 3);
 
-        rankMatch4Two = new CheckBox("2");
+        rankMatch4Two = new RadioButton("2");
+        rankMatch4Two.setToggleGroup(rankingMatch4);
         GridPane.setRowIndex(rankMatch4Two, 13);
         GridPane.setColumnIndex(rankMatch4Two, 4);
 
-        rankMatch4Three = new CheckBox("3");
+        rankMatch4Three = new RadioButton("3");
+        rankMatch4Three.setToggleGroup(rankingMatch4);
         GridPane.setRowIndex(rankMatch4Three,13);
         GridPane.setColumnIndex(rankMatch4Three, 5);
 
-        rankMatch4Four = new CheckBox("4");
+        rankMatch4Four = new RadioButton("4");
+        rankMatch4Four.setToggleGroup(rankingMatch4);
         GridPane.setRowIndex(rankMatch4Four, 13);
         GridPane.setColumnIndex(rankMatch4Four, 6);
 
-        rankMatch4Five = new CheckBox("5");
+        rankMatch4Five = new RadioButton("5");
+        rankMatch4Five.setToggleGroup(rankingMatch4);
         GridPane.setRowIndex(rankMatch4Five, 13);
         GridPane.setColumnIndex(rankMatch4Five, 7);
 
-        rankMatch5One = new CheckBox("1");
+        rankingMatch5 = new ToggleGroup();
+
+        rankMatch5One = new RadioButton("1");
+        rankMatch5One.setToggleGroup(rankingMatch5);
         GridPane.setRowIndex(rankMatch5One, 16);
         GridPane.setColumnIndex(rankMatch5One, 3);
 
-        rankMatch5Two = new CheckBox("2");
+        rankMatch5Two = new RadioButton("2");
+        rankMatch5Two.setToggleGroup(rankingMatch5);
         GridPane.setRowIndex(rankMatch5Two, 16);
         GridPane.setColumnIndex(rankMatch5Two, 4);
 
-        rankMatch5Three = new CheckBox("3");
+        rankMatch5Three = new RadioButton("3");
+        rankMatch5Three.setToggleGroup(rankingMatch5);
         GridPane.setRowIndex(rankMatch5Three, 16);
         GridPane.setColumnIndex(rankMatch5Three, 5);
 
-        rankMatch5Four = new CheckBox("4");
+        rankMatch5Four = new RadioButton("4");
+        rankMatch5Four.setToggleGroup(rankingMatch5);
         GridPane.setRowIndex(rankMatch5Four, 16);
         GridPane.setColumnIndex(rankMatch5Four, 6);
 
-        rankMatch5Five = new CheckBox("5");
+        rankMatch5Five = new RadioButton("5");
+        rankMatch5Five.setToggleGroup(rankingMatch5);
         GridPane.setRowIndex(rankMatch5Five, 16);
         GridPane.setColumnIndex(rankMatch5Five, 7);
 
-        grid.getChildren().addAll(rankMatch1One, rankMatch1Two, rankMatch1Three, rankMatch1Four, rankMatch1Five, rankMatch2One,rankMatch2Two, rankMatch2Three, rankMatch2Four, rankMatch2Five, rankMatch3One, rankMatch3Two, rankMatch3Three, rankMatch3Four, rankMatch3Five, rankMatch4One, rankMatch4Two, rankMatch4Three, rankMatch4Four, rankMatch4Five, rankMatch5One, rankMatch5Two, rankMatch5Three, rankMatch5Four, rankMatch5Five, autoLabel1, teleLabel1, endLabel1, autoLabel2, teleLabel2, endLabel2, autoLabel3, teleLabel3, endLabel3, autoLabel4, teleLabel4, endLabel4, autoLabel5, teleLabel5, endLabel5, textAreaMatch1One, textAreaMatch1Two, textAreaMatch1Three, textAreaMatch2One, textAreaMatch2Two, textAreaMatch2Three, textAreaMatch3One, textAreaMatch3Two, textAreaMatch3Three, textAreaMatch4One,textAreaMatch4Two, textAreaMatch4Three, textAreaMatch5One, textAreaMatch5Two, textAreaMatch5Three, ml1, ml2, ml3, ml4, ml5);
+        grid.getChildren().addAll(rankMatch2One,rankMatch2Two, rankMatch2Three, rankMatch2Four, rankMatch2Five, rankMatch3One, rankMatch3Two, rankMatch3Three, rankMatch3Four, rankMatch3Five, rankMatch4One, rankMatch4Two, rankMatch4Three, rankMatch4Four, rankMatch4Five, rankMatch5One, rankMatch5Two, rankMatch5Three, rankMatch5Four, rankMatch5Five, autoLabel1, teleLabel1, endLabel1, autoLabel2, teleLabel2, endLabel2, autoLabel3, teleLabel3, endLabel3, autoLabel4, teleLabel4, endLabel4, autoLabel5, teleLabel5, endLabel5, textAreaMatch1One, textAreaMatch1Two, textAreaMatch1Three, textAreaMatch2One, textAreaMatch2Two, textAreaMatch2Three, textAreaMatch3One, textAreaMatch3Two, textAreaMatch3Three, textAreaMatch4One,textAreaMatch4Two, textAreaMatch4Three, textAreaMatch5One, textAreaMatch5Two, textAreaMatch5Three, ml1, ml2, ml3, ml4, ml5);
 
 
         //Scene Builder for scene2
@@ -553,31 +548,8 @@ public class Main extends Application {
                 textAreaMatch5One.setText(selectedTeam.getMatch5one());
                 textAreaMatch5Two.setText(selectedTeam.getMatch5two());
                 textAreaMatch5Three.setText(selectedTeam.getMatch5three());
-                rankMatch1One.setSelected(selectedTeam.getRank1One());
-                rankMatch1Two.setSelected(selectedTeam.getRank1Two());
-                rankMatch1Three.setSelected(selectedTeam.getRank1Three());
-                rankMatch1Four.setSelected(selectedTeam.getRank1Four());
-                rankMatch1Five.setSelected(selectedTeam.getRank1Five());
-                rankMatch2One.setSelected(selectedTeam.getRank2One());
-                rankMatch2Two.setSelected(selectedTeam.getRank2Two());
-                rankMatch2Three.setSelected(selectedTeam.getRank2Three());
-                rankMatch2Four.setSelected(selectedTeam.getRank2Four());
-                rankMatch2Five.setSelected(selectedTeam.getRank2Five());
-                rankMatch3One.setSelected(selectedTeam.getRank3One());
-                rankMatch3Two.setSelected(selectedTeam.getRank3Two());
-                rankMatch3Three.setSelected(selectedTeam.getRank3Three());
-                rankMatch3Four.setSelected(selectedTeam.getRank3Four());
-                rankMatch3Five.setSelected(selectedTeam.getRank3Five());
-                rankMatch4One.setSelected(selectedTeam.getRank4One());
-                rankMatch4Two.setSelected(selectedTeam.getRank4Two());
-                rankMatch4Three.setSelected(selectedTeam.getRank4Three());
-                rankMatch4Four.setSelected(selectedTeam.getRank4Four());
-                rankMatch4Five.setSelected(selectedTeam.getRank4Five());
-                rankMatch5One.setSelected(selectedTeam.getRank5One());
-                rankMatch5Two.setSelected(selectedTeam.getRank5Two());
-                rankMatch5Three.setSelected(selectedTeam.getRank5Three());
-                rankMatch5Four.setSelected(selectedTeam.getRank5Four());
-                rankMatch5Five.setSelected(selectedTeam.getRank5Five());
+                RadioButton match1Button = rankMatch1.get(selectedTeam.getMatch1Rank()-1);
+                match1Button.setSelected(true);
             }
             primaryStage.setScene(scene2);
         });
