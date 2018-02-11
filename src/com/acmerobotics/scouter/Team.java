@@ -192,7 +192,7 @@ public class Team {
         return match3Rank;
     }
 
-    public void setMatch3Rank(int match2Rank) {
+    public void setMatch3Rank(int match3Rank) {
         this.match3Rank = match3Rank;
     }
 
