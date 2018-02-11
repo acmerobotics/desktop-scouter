@@ -9,6 +9,7 @@ import javafx.geometry.*;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxListCell;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.ListView;
@@ -29,8 +30,7 @@ import static java.io.File.separator;
 
 public class Main extends Application {
 
-    private TableView table = new TableView();
-    private ListView<Team> listView;
+    private TableView<Team> table = new TableView<>();
     private Scene scene1, scene2;
     private TextField teamNameField;
     private TextField teamNumberField;
@@ -79,70 +79,77 @@ public class Main extends Application {
         button1.setDisable(true);
 
         // TableView that shows all of the team names and numbers that are attending the competition
+        TableColumn nameColumn = new TableColumn("Name");
+        TableColumn numberColumn = new TableColumn("Number");
+        TableColumn<Team, Double> averageRankColunm = new TableColumn<>("Average Rank");
+        table.getColumns().addAll(nameColumn, numberColumn, averageRankColunm);
+
+        nameColumn.setCellValueFactory(
+                new PropertyValueFactory<Team,String>("name")
+        );
+
+        numberColumn.setCellValueFactory(
+                new PropertyValueFactory<Team,String>("number")
+        );
+
+        averageRankColunm.setCellValueFactory(
+                new PropertyValueFactory<>("averageRank")
+        );
+
+        table.setMaxWidth(500);
+        table.setPrefHeight(650);
 
 
-
-
-
-
-        listView = new ListView<>();
-        listView.setMaxWidth(500);
-        listView.setPrefHeight(650);
-
-
+        final ObservableList<Team> teamList = FXCollections.observableArrayList();
         Team techSupport = new Team("Tech Support", 5214);
-        listView.getItems().add(techSupport);
+        teamList.add(techSupport);
         Team topDogs = new Team("Top Dogs", 6357);
-        listView.getItems().add(topDogs);
+        teamList.add(topDogs);
         Team einstienEagles = new Team("Einstien Eagles", 6949);
-        listView.getItems().add(einstienEagles);
+        teamList.add(einstienEagles);
         Team acme = new Team("ACME Robotics", 8367);
-        listView.getItems().add(acme);
+        teamList.add(acme);
         Team faze = new Team("FaZe Robotics", 10320);
-        listView.getItems().add(faze);
+        teamList.add(faze);
         Team wolverines = new Team("Wolverines", 11182);
-        listView.getItems().add(wolverines);
+        teamList.add(wolverines);
         Team teravoltz = new Team("Teravoltz", 11475);
-        listView.getItems().add(teravoltz);
+        teamList.add(teravoltz);
         Team mad = new Team("MaD Robotics", 11548);
-        listView.getItems().add(mad);
+        teamList.add(mad);
         Team quarry = new Team("Quarry Lane Cougars", 11920);
-        listView.getItems().add(quarry);
+        teamList.add(quarry);
         Team bracket = new Team("Bracket Sources", 13215);
-        listView.getItems().add(bracket);
+        teamList.add(bracket);
         Team deja = new Team("Deja Vu", 13216);
-        listView.getItems().add(deja);
+        teamList.add(deja);
         Team orca = new Team("Orca Ninjas", 13218);
-        listView.getItems().add(orca);
+        teamList.add(orca);
         Team architechs = new Team("The Architechs", 13220);
-        listView.getItems().add(architechs);
+        teamList.add(architechs);
         Team gophor = new Team("Gophor Robotics", 13221);
-        listView.getItems().add(gophor);
+        teamList.add(gophor);
         Team cyberscots = new Team("Cyberscots", 13228);
-        listView.getItems().add(cyberscots);
+        teamList.add(cyberscots);
         Team beta = new Team("Beta Wolves", 14053);
-        listView.getItems().add(beta);
+        teamList.add(beta);
+
+        table.setItems(teamList);
 
 
-        listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Team>() {
+        table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Team>() {
             @Override
             public void changed(ObservableValue<? extends Team> observable, Team oldValue, Team newValue) {
-                if (listView.isPressed()){
+                if (table.isPressed()){
                     button1.setDisable(false);
                 }
             }
         });
 
-        listView.setCellFactory(new Callback<ListView<Team>, ListCell<Team>>() {
-            @Override
-            public ListCell<Team> call(ListView<Team> param) {
-                return new TeamCell();
-            }
-        });
 
         //Scene builder for scene1
         VBox root1 = new VBox();
-        root1.getChildren().addAll(listView, button1);
+        root1.getChildren().addAll(table, button1);
         scene1 = new Scene(root1, 1500, 700);
         primaryStage.setScene(scene1);
         primaryStage.show();
@@ -157,25 +164,25 @@ public class Main extends Application {
         //Back Button
         Button button2 = new Button("Back");
         button2.setOnAction(e -> {
-            Team selectedTeam = listView.getSelectionModel().getSelectedItem();
+            Team selectedTeam = table.getSelectionModel().getSelectedItem();
             if (selectedTeam != null) {
                 selectedTeam.setName(teamNameField.getText());
                 selectedTeam.setNumber(Integer.parseInt(teamNumberField.getText()));
-                selectedTeam.setMatch1one(textAreaMatch1One.getText());
-                selectedTeam.setMatch1two(textAreaMatch1Two.getText());
-                selectedTeam.setMatch1three(textAreaMatch1Three.getText());
-                selectedTeam.setMatch2one(textAreaMatch2One.getText());
-                selectedTeam.setMatch2two(textAreaMatch2Two.getText());
-                selectedTeam.setMatch2three(textAreaMatch2Three.getText());
-                selectedTeam.setMatch3one(textAreaMatch3One.getText());
-                selectedTeam.setMatch3two(textAreaMatch3Two.getText());
-                selectedTeam.setMatch3three(textAreaMatch3Three.getText());
-                selectedTeam.setMatch4one(textAreaMatch4One.getText());
-                selectedTeam.setMatch4two(textAreaMatch4Two.getText());
-                selectedTeam.setMatch4three(textAreaMatch4Three.getText());
-                selectedTeam.setMatch5one(textAreaMatch5One.getText());
-                selectedTeam.setMatch5two(textAreaMatch5Two.getText());
-                selectedTeam.setMatch5three(textAreaMatch5Three.getText());
+                selectedTeam.setMatch1Auto(textAreaMatch1One.getText());
+                selectedTeam.setMatch1Tele(textAreaMatch1Two.getText());
+                selectedTeam.setMatch1End(textAreaMatch1Three.getText());
+                selectedTeam.setMatch2Auto(textAreaMatch2One.getText());
+                selectedTeam.setMatch2Tele(textAreaMatch2Two.getText());
+                selectedTeam.setMatch2End(textAreaMatch2Three.getText());
+                selectedTeam.setMatch3Auto(textAreaMatch3One.getText());
+                selectedTeam.setMatch3Tele(textAreaMatch3Two.getText());
+                selectedTeam.setMatch3End(textAreaMatch3Three.getText());
+                selectedTeam.setMatch4Auto(textAreaMatch4One.getText());
+                selectedTeam.setMatch4Tele(textAreaMatch4Two.getText());
+                selectedTeam.setMatch4End(textAreaMatch4Three.getText());
+                selectedTeam.setMatch5Auto(textAreaMatch5One.getText());
+                selectedTeam.setMatch5Tele(textAreaMatch5Two.getText());
+                selectedTeam.setMatch5End(textAreaMatch5Three.getText());
                 int index1 = rankMatch1.indexOf(rankingMatch1.getSelectedToggle());
                 selectedTeam.setMatch1Rank(index1+1);
                 int index2 = rankMatch2.indexOf(rankingMatch2.getSelectedToggle());
@@ -186,6 +193,8 @@ public class Main extends Application {
                 selectedTeam.setMatch4Rank(index4+1);
                 int index5 = rankMatch5.indexOf(rankingMatch5.getSelectedToggle());
                 selectedTeam.setMatch5Rank(index5+1);
+                selectedTeam.recalculateAverageRank();
+                table.refresh();
             }
 
             primaryStage.setScene(scene1);
@@ -460,25 +469,25 @@ public class Main extends Application {
 
         //button that takes us to scene2
         button1.setOnAction(e -> {
-            Team selectedTeam = listView.getSelectionModel().getSelectedItem();
+            Team selectedTeam = table.getSelectionModel().getSelectedItem();
             if( selectedTeam != null) {
                 teamNameField.setText(selectedTeam.getName());
                 teamNumberField.setText(String.valueOf(selectedTeam.getNumber()));
-                textAreaMatch1One.setText(selectedTeam.getMatch1one());
-                textAreaMatch1Two.setText(selectedTeam.getMatch1two());
-                textAreaMatch1Three.setText(selectedTeam.getMatch1three());
-                textAreaMatch2One.setText(selectedTeam.getMatch2one());
-                textAreaMatch2Two.setText(selectedTeam.getMatch2two());
-                textAreaMatch2Three.setText(selectedTeam.getMatch2three());
-                textAreaMatch3One.setText(selectedTeam.getMatch3one());
-                textAreaMatch3Two.setText(selectedTeam.getMatch3two());
-                textAreaMatch3Three.setText(selectedTeam.getMatch3three());
-                textAreaMatch4One.setText(selectedTeam.getMatch4one());
-                textAreaMatch4Two.setText(selectedTeam.getMatch4two());
-                textAreaMatch4Three.setText(selectedTeam.getMatch4three());
-                textAreaMatch5One.setText(selectedTeam.getMatch5one());
-                textAreaMatch5Two.setText(selectedTeam.getMatch5two());
-                textAreaMatch5Three.setText(selectedTeam.getMatch5three());
+                textAreaMatch1One.setText(selectedTeam.getMatch1Auto());
+                textAreaMatch1Two.setText(selectedTeam.getMatch1Tele());
+                textAreaMatch1Three.setText(selectedTeam.getMatch1End());
+                textAreaMatch2One.setText(selectedTeam.getMatch2Auto());
+                textAreaMatch2Two.setText(selectedTeam.getMatch2Tele());
+                textAreaMatch2Three.setText(selectedTeam.getMatch2End());
+                textAreaMatch3One.setText(selectedTeam.getMatch3Auto());
+                textAreaMatch3Two.setText(selectedTeam.getMatch3Tele());
+                textAreaMatch3Three.setText(selectedTeam.getMatch3End());
+                textAreaMatch4One.setText(selectedTeam.getMatch4Auto());
+                textAreaMatch4Two.setText(selectedTeam.getMatch4Tele());
+                textAreaMatch4Three.setText(selectedTeam.getMatch4End());
+                textAreaMatch5One.setText(selectedTeam.getMatch5Auto());
+                textAreaMatch5Two.setText(selectedTeam.getMatch5Tele());
+                textAreaMatch5Three.setText(selectedTeam.getMatch5End());
                 RadioButton match1Button = rankMatch1.get(selectedTeam.getMatch1Rank()-1);
                 match1Button.setSelected(true);
                 RadioButton match2Button = rankMatch2.get(selectedTeam.getMatch2Rank()-1);
