@@ -1,28 +1,18 @@
 package com.acmerobotics.scouter;
 
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import javafx.beans.property.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Team {
 
     private StringProperty nameProperty = new SimpleStringProperty();
     private IntegerProperty numberProperty = new SimpleIntegerProperty();
     private DoubleProperty averageRankProperty = new SimpleDoubleProperty(3.0);
-    private StringProperty match1AutoProperty = new SimpleStringProperty();
-    private StringProperty match1TeleProperty = new SimpleStringProperty();
-    private StringProperty match1EndProperty = new SimpleStringProperty();
-    private StringProperty match2AutoProperty = new SimpleStringProperty();
-    private StringProperty match2TeleProperty = new SimpleStringProperty();
-    private StringProperty match2EndProperty = new SimpleStringProperty();
-    private StringProperty match3AutoProperty = new SimpleStringProperty();
-    private StringProperty match3TeleProperty = new SimpleStringProperty();
-    private StringProperty match3EndProperty = new SimpleStringProperty();
-    private StringProperty match4AutoProperty = new SimpleStringProperty();
-    private StringProperty match4TeleProperty = new SimpleStringProperty();
-    private StringProperty match4EndProperty = new SimpleStringProperty();
-    private StringProperty match5AutoProperty = new SimpleStringProperty();
-    private StringProperty match5TeleProperty = new SimpleStringProperty();
-    private StringProperty match5EndProperty = new SimpleStringProperty();
+    private List<MatchData> matchDataList = new ArrayList<>();
     private int match1Rank = 3;
     private int match2Rank = 3;
     private int match3Rank = 3;
@@ -35,6 +25,9 @@ public class Team {
         this.nameProperty.setValue(name);
         this.numberProperty.setValue(number);
 
+        for (int i = 0;i < 5; i++) {
+            matchDataList.add(new MatchData());
+        }
     }
 
     public String getName() {
@@ -54,126 +47,10 @@ public class Team {
         numberProperty.setValue(newNumber);
     }
 
-    public String getMatch1Auto() {
-        return match1AutoProperty.getValue();
+    public List<MatchData> getMatchDataList() {
+        return matchDataList;
     }
 
-    public void setMatch1Auto(String match1Auto) {
-        this.match1AutoProperty.setValue(match1Auto);
-    }
-
-    public String getMatch1Tele() {
-        return match1TeleProperty.getValue();
-    }
-
-    public void setMatch1Tele(String match1Tele) {
-        this.match1TeleProperty.setValue(match1Tele);
-    }
-
-    public String getMatch1End() {
-        return match1EndProperty.getValue();
-    }
-
-    public void setMatch1End(String match1End) {
-        this.match1EndProperty.setValue(match1End);
-    }
-
-    public String getMatch2Auto() {
-        return match2AutoProperty.getValue();
-    }
-
-    public void setMatch2Auto(String match2Auto) {
-        this.match2AutoProperty.setValue(match2Auto);
-    }
-
-    public String getMatch2Tele() {
-        return match2TeleProperty.getValue();
-    }
-
-    public void setMatch2Tele(String match2Tele) {
-        this.match2TeleProperty.setValue(match2Tele);
-    }
-
-    public String getMatch2End() {
-        return match2EndProperty.getValue();
-    }
-
-    public void setMatch2End(String match2End) {
-        this.match2EndProperty.setValue(match2End);
-
-    }
-
-    public String getMatch3Auto() {
-        return match3AutoProperty.getValue();
-    }
-
-    public void setMatch3Auto(String match3Auto) {
-        this.match3AutoProperty.setValue(match3Auto);
-    }
-
-    public String getMatch3Tele() {
-        return match3TeleProperty.getValue();
-    }
-
-    public void setMatch3Tele(String match3Tele) {
-        this.match3TeleProperty.setValue(match3Tele);
-    }
-
-    public String getMatch3End() {
-        return match3EndProperty.getValue();
-    }
-
-    public void setMatch3End(String match3End) {
-        this.match3EndProperty.setValue(match3End);
-    }
-
-    public String getMatch4Auto() {
-        return match4AutoProperty.getValue();
-    }
-
-    public void setMatch4Auto(String match4Auto) {
-        this.match4AutoProperty.setValue(match4Auto);
-    }
-
-    public String getMatch4Tele() {
-        return match4TeleProperty.getValue();
-    }
-
-    public void setMatch4Tele(String match4Tele) {
-        this.match4TeleProperty.setValue(match4Tele);
-    }
-
-    public String getMatch4End() {
-        return match4EndProperty.getValue();
-    }
-
-    public void setMatch4End(String match4End) {
-        this.match4EndProperty.setValue(match4End);
-    }
-
-    public String getMatch5Auto() {
-        return match5AutoProperty.getValue();
-    }
-
-    public void setMatch5Auto(String match5Auto) {
-        this.match5AutoProperty.setValue(match5Auto);
-    }
-
-    public String getMatch5Tele() {
-        return match5TeleProperty.getValue();
-    }
-
-    public void setMatch5Tele(String match5Tele) {
-        this.match5TeleProperty.setValue(match5Tele);
-    }
-
-    public String getMatch5End() {
-        return match5EndProperty.getValue();
-    }
-
-    public void setMatch5End(String match5End) {
-        this.match5EndProperty.setValue(match5End);
-    }
 
     public int getMatch1Rank() {
         return match1Rank;

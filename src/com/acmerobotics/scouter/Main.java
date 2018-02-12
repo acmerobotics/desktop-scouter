@@ -1,5 +1,6 @@
 package com.acmerobotics.scouter;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -34,29 +35,28 @@ public class Main extends Application {
     private Scene scene1, scene2;
     private TextField teamNameField;
     private TextField teamNumberField;
-    private TextArea textAreaMatch1One;
-    private TextArea textAreaMatch1Two;
-    private TextArea textAreaMatch1Three;
+    private List<CheckBox> gotJewelCheckBoxes = new ArrayList<>();
+    private List<CheckBox> parkedCheckBoxes = new ArrayList<>();
+    private List<TextField> autoGlyphsField = new ArrayList<>();
+    private List<CheckBox> keyCheckBoxes = new ArrayList<>();
+    private List<TextField> teleGlyphsField = new ArrayList<>();
+    private List<TextField> numberofRowsField = new ArrayList<>();
+    private List<TextField> numberofColunmsField = new ArrayList<>();
+    private List<CheckBox> cipherCheckBoxes = new ArrayList<>();
+    private List<RadioButton> notPlacedRadioButtons = new ArrayList<>();
+    private List<RadioButton> zone1RadioButtons = new ArrayList<>();
+    private List<RadioButton> zone2RadioButtons = new ArrayList<>();
+    private List<RadioButton> zone3RadioButtons = new ArrayList<>();
+    private List<CheckBox> relicUprightCheckBoxes = new ArrayList<>();
+    private List<CheckBox> onBalancingStoneCheckBoxes = new ArrayList<>();
     private ToggleGroup rankingMatch1;
     private List<RadioButton> rankMatch1 = new ArrayList<>();
-    private TextArea textAreaMatch2One;
-    private TextArea textAreaMatch2Two;
-    private TextArea textAreaMatch2Three;
     private ToggleGroup rankingMatch2;
     private List<RadioButton> rankMatch2 = new ArrayList<>();
-    private TextArea textAreaMatch3One;
-    private TextArea textAreaMatch3Two;
-    private TextArea textAreaMatch3Three;
     private ToggleGroup rankingMatch3;
     private List<RadioButton> rankMatch3 = new ArrayList<>();
-    private TextArea textAreaMatch4One;
-    private TextArea textAreaMatch4Two;
-    private TextArea textAreaMatch4Three;
     private ToggleGroup rankingMatch4;
     private List<RadioButton> rankMatch4 = new ArrayList<>();
-    private TextArea textAreaMatch5One;
-    private TextArea textAreaMatch5Two;
-    private TextArea textAreaMatch5Three;
     private ToggleGroup rankingMatch5;
     private List<RadioButton> rankMatch5 = new ArrayList<>();
 
@@ -168,21 +168,6 @@ public class Main extends Application {
             if (selectedTeam != null) {
                 selectedTeam.setName(teamNameField.getText());
                 selectedTeam.setNumber(Integer.parseInt(teamNumberField.getText()));
-                selectedTeam.setMatch1Auto(textAreaMatch1One.getText());
-                selectedTeam.setMatch1Tele(textAreaMatch1Two.getText());
-                selectedTeam.setMatch1End(textAreaMatch1Three.getText());
-                selectedTeam.setMatch2Auto(textAreaMatch2One.getText());
-                selectedTeam.setMatch2Tele(textAreaMatch2Two.getText());
-                selectedTeam.setMatch2End(textAreaMatch2Three.getText());
-                selectedTeam.setMatch3Auto(textAreaMatch3One.getText());
-                selectedTeam.setMatch3Tele(textAreaMatch3Two.getText());
-                selectedTeam.setMatch3End(textAreaMatch3Three.getText());
-                selectedTeam.setMatch4Auto(textAreaMatch4One.getText());
-                selectedTeam.setMatch4Tele(textAreaMatch4Two.getText());
-                selectedTeam.setMatch4End(textAreaMatch4Three.getText());
-                selectedTeam.setMatch5Auto(textAreaMatch5One.getText());
-                selectedTeam.setMatch5Tele(textAreaMatch5Two.getText());
-                selectedTeam.setMatch5End(textAreaMatch5Three.getText());
                 int index1 = rankMatch1.indexOf(rankingMatch1.getSelectedToggle());
                 selectedTeam.setMatch1Rank(index1+1);
                 int index2 = rankMatch2.indexOf(rankingMatch2.getSelectedToggle());
@@ -232,180 +217,112 @@ public class Main extends Application {
 
         grid.getChildren().addAll(teamNameField, teamNumberField,teamName, teamNumber);
 
-        //TextAreas and Labels for matches
-        textAreaMatch1One = new TextArea();
-        textAreaMatch1One.setMaxWidth(200);
-        textAreaMatch1One.setPrefHeight(80);
-        textAreaMatch1Two = new TextArea();
-        textAreaMatch1Two.setMaxWidth(200);
-        textAreaMatch1Two.setPrefHeight(80);
-        textAreaMatch1Three = new TextArea();
-        textAreaMatch1Three.setMaxWidth(200);
-        textAreaMatch1Three.setPrefHeight(80);
-
-        GridPane.setRowIndex(textAreaMatch1One, 4);
-        GridPane.setColumnIndex(textAreaMatch1One, 0);
-        GridPane.setRowIndex(textAreaMatch1Two,4);
-        GridPane.setColumnIndex(textAreaMatch1Two, 1);
-        GridPane.setRowIndex(textAreaMatch1Three, 4);
-        GridPane.setColumnIndex(textAreaMatch1Three, 2);
-
-        Label autoLabel1= new Label("Autonomous:");
-        autoLabel1.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
-        GridPane.setRowIndex(autoLabel1, 3);
-        GridPane.setColumnIndex(autoLabel1, 0);
-        Label teleLabel1 = new Label("TeleOp:");
-        teleLabel1.setFont(Font.font("Tahoma", FontWeight.NORMAL,15));
-        GridPane.setRowIndex(teleLabel1,3);
-        GridPane.setColumnIndex(teleLabel1,1);
-        Label endLabel1 = new Label("End Game:");
-        endLabel1.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
-        GridPane.setRowIndex(endLabel1,3);
-        GridPane.setColumnIndex(endLabel1, 2);
+        // Additional components and Labels for matches
 
 
-        Label ml1 = new Label("Match 1");
-        GridPane.setRowIndex(ml1, 2);
-        GridPane.setColumnIndex(ml1, 0);
-
-        Label autoLabel2= new Label("Autonomous:");
-        autoLabel2.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
-        GridPane.setRowIndex(autoLabel2, 6);
-        GridPane.setColumnIndex(autoLabel2, 0);
-        Label teleLabel2 = new Label("TeleOp:");
-        teleLabel2.setFont(Font.font("Tahoma", FontWeight.NORMAL,15));
-        GridPane.setRowIndex(teleLabel2,6);
-        GridPane.setColumnIndex(teleLabel2,1);
-        Label endLabel2 = new Label("End Game:");
-        endLabel2.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
-        GridPane.setRowIndex(endLabel2,6);
-        GridPane.setColumnIndex(endLabel2, 2);
-
-        textAreaMatch2One = new TextArea();
-        textAreaMatch2One.setPrefHeight(80);
-        textAreaMatch2One.setMaxWidth(200);
-        GridPane.setRowIndex(textAreaMatch2One, 7);
-        GridPane.setColumnIndex(textAreaMatch2One, 0);
-        textAreaMatch2Two = new TextArea();
-        textAreaMatch2Two.setPrefHeight(80);
-        textAreaMatch2Two.setMaxWidth(200);
-        GridPane.setRowIndex(textAreaMatch2Two, 7);
-        GridPane.setColumnIndex(textAreaMatch2Two, 1);
-        textAreaMatch2Three = new TextArea();
-        textAreaMatch2Three.setPrefHeight(80);
-        textAreaMatch2Three.setMaxWidth(200);
-        GridPane.setRowIndex(textAreaMatch2Three, 7);
-        GridPane.setColumnIndex(textAreaMatch2Three, 2);
-
-        Label ml2 = new Label("Match 2");
-        GridPane.setRowIndex(ml2, 5);
-        GridPane.setColumnIndex(ml2, 0);
-
-
-       Label autoLabel3= new Label("Autonomous:");
-        autoLabel3.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
-        GridPane.setRowIndex(autoLabel3, 9);
-        GridPane.setColumnIndex(autoLabel3, 0);
-        Label teleLabel3 = new Label("TeleOp:");
-        teleLabel3.setFont(Font.font("Tahoma", FontWeight.NORMAL,15));
-        GridPane.setRowIndex(teleLabel3,9);
-        GridPane.setColumnIndex(teleLabel3,1);
-        Label endLabel3 = new Label("End Game:");
-        endLabel3.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
-        GridPane.setRowIndex(endLabel3,9);
-        GridPane.setColumnIndex(endLabel3, 2);
-
-
-        textAreaMatch3One = new TextArea();
-        textAreaMatch3One.setPrefHeight(80);
-        textAreaMatch3One.setMaxWidth(200);
-        textAreaMatch3Two = new TextArea();
-        textAreaMatch3Two.setPrefHeight(80);
-        textAreaMatch3Two.setMaxWidth(200);
-        textAreaMatch3Three = new TextArea();
-        textAreaMatch3Three.setPrefHeight(80);
-        textAreaMatch3Three.setMaxWidth(200);
-
-        GridPane.setRowIndex(textAreaMatch3One,10);
-        GridPane.setColumnIndex(textAreaMatch3One, 0);
-        GridPane.setRowIndex(textAreaMatch3Two, 10);
-        GridPane.setColumnIndex(textAreaMatch3Two,1);
-        GridPane.setRowIndex(textAreaMatch3Three, 10);
-        GridPane.setColumnIndex(textAreaMatch3Three, 2);
-
-        Label ml3 = new Label("Match 3");
-        GridPane.setRowIndex(ml3, 8);
-        GridPane.setColumnIndex(ml3, 0);
-
-        textAreaMatch4One = new TextArea();
-        textAreaMatch4One.setPrefHeight(80);
-        textAreaMatch4One.setMaxWidth(200);
-        textAreaMatch4Two = new TextArea();
-        textAreaMatch4Two.setPrefHeight(80);
-        textAreaMatch4Two.setMaxWidth(200);
-        textAreaMatch4Three = new TextArea();
-        textAreaMatch4Three.setPrefHeight(80);
-        textAreaMatch4Three.setMaxWidth(200);
-
-        GridPane.setRowIndex(textAreaMatch4One, 13);
-        GridPane.setColumnIndex(textAreaMatch4One, 0);
-        GridPane.setRowIndex(textAreaMatch4Two,13);
-        GridPane.setColumnIndex(textAreaMatch4Two,1);
-        GridPane.setRowIndex(textAreaMatch4Three,13);
-        GridPane.setColumnIndex(textAreaMatch4Three, 2);
-
-        Label autoLabel4 = new Label("Autonomous:");
-        autoLabel4.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
-        GridPane.setRowIndex(autoLabel4, 12);
-        GridPane.setColumnIndex(autoLabel4, 0);
-        Label teleLabel4 = new Label("TeleOp:");
-        teleLabel4.setFont(Font.font("Tahoma", FontWeight.NORMAL,15));
-        GridPane.setRowIndex(teleLabel4,12);
-        GridPane.setColumnIndex(teleLabel4,1);
-        Label endLabel4 = new Label("End Game:");
-        endLabel4.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
-        GridPane.setRowIndex(endLabel4,12);
-        GridPane.setColumnIndex(endLabel4, 2);
-
-        Label ml4 = new Label("Match 4");
-        GridPane.setRowIndex(ml4, 11);
-        GridPane.setColumnIndex(ml4, 0);
+        int row1 = 3;
+        int row2 = 3;
+        int row3 = 3;
+        int row4 = 3;
+        for (int i = 0; i < 5; i++) {
+            CheckBox jewelBox = new CheckBox("Got Jewel");
+            GridPane.setRowIndex(jewelBox, row1++);
+            GridPane.setColumnIndex(jewelBox, 0);
+            grid.getChildren().add(jewelBox);
+            gotJewelCheckBoxes.add(jewelBox);
+            CheckBox parkedBox = new CheckBox("Parked");
+            GridPane.setRowIndex(parkedBox, row1++);
+            GridPane.setColumnIndex(parkedBox, 0);
+            grid.getChildren().add(parkedBox);
+            parkedCheckBoxes.add(parkedBox);
+            TextField autoGlyphField = new TextField();
+            autoGlyphField.setMaxWidth(50);
+            GridPane.setRowIndex(autoGlyphField, row1++);
+            GridPane.setColumnIndex(autoGlyphField, 0);
+            grid.getChildren().add(autoGlyphField);
+            autoGlyphsField.add(autoGlyphField);
+            CheckBox keyBox = new CheckBox("Cryptobox Key");
+            GridPane.setRowIndex(keyBox, row1++);
+            GridPane.setColumnIndex(keyBox, 0);
+            grid.getChildren().add(keyBox);
+            keyCheckBoxes.add(keyBox);
+            TextField teleGlyphField = new TextField();
+            teleGlyphField.setMaxWidth(50);
+            GridPane.setRowIndex(teleGlyphField, row2++);
+            GridPane.setColumnIndex(teleGlyphField, 3);
+            grid.getChildren().add(teleGlyphField);
+            teleGlyphsField.add(teleGlyphField);
+            TextField numberofRows = new TextField();
+            numberofRows.setMaxWidth(50);
+            GridPane.setRowIndex(numberofRows, row2++);
+            GridPane.setColumnIndex(numberofRows, 3);
+            grid.getChildren().add(numberofRows);
+            numberofRowsField.add(numberofRows);
+            TextField numberofColumns = new TextField();
+            numberofColumns.setMaxWidth(50);
+            GridPane.setRowIndex(numberofColumns, row2++);
+            GridPane.setColumnIndex(numberofColumns, 3);
+            grid.getChildren().add(numberofColumns);
+            numberofColunmsField.add(numberofColumns);
+            CheckBox cipherBox = new CheckBox("Cipher");
+            GridPane.setRowIndex(cipherBox, row2++);
+            GridPane.setColumnIndex(cipherBox, 3);
+            grid.getChildren().add(cipherBox);
+            cipherCheckBoxes.add(cipherBox);
+            ToggleGroup relicToggleGroup = new ToggleGroup();
+            RadioButton notplacedButton = new RadioButton("Not Placed");
+            notplacedButton.setToggleGroup(relicToggleGroup);
+            GridPane.setRowIndex(notplacedButton, row3++);
+            GridPane.setColumnIndex(notplacedButton, 5);
+            grid.getChildren().add(notplacedButton);
+            notPlacedRadioButtons.add(notplacedButton);
+            RadioButton zone1Button = new RadioButton("Zone 1");
+            zone1Button.setToggleGroup(relicToggleGroup);
+            GridPane.setRowIndex(zone1Button, row3++);
+            GridPane.setColumnIndex(zone1Button, 5);
+            grid.getChildren().add(zone1Button);
+            zone1RadioButtons.add(zone1Button);
+            RadioButton zone2Button = new RadioButton("Zone 2");
+            zone2Button.setToggleGroup(relicToggleGroup);
+            GridPane.setRowIndex(zone2Button, row3++);
+            GridPane.setColumnIndex(zone2Button, 5);
+            grid.getChildren().add(zone2Button);
+            zone2RadioButtons.add(zone2Button);
+            RadioButton zone3Button = new RadioButton("Zone 3");
+            zone3Button.setToggleGroup(relicToggleGroup);
+            GridPane.setRowIndex(zone3Button, row3++);
+            GridPane.setColumnIndex(zone3Button, 5);
+            grid.getChildren().add(zone3Button);
+            zone3RadioButtons.add(zone3Button);
+            CheckBox relicUprightBox = new CheckBox("Relic Upright");
+            GridPane.setRowIndex(relicUprightBox, row4++);
+            GridPane.setColumnIndex(relicUprightBox, 6);
+            grid.getChildren().add(relicUprightBox);
+            relicUprightCheckBoxes.add(relicUprightBox);
+            CheckBox onStoneBox = new CheckBox("Balancing On Stone");
+            GridPane.setRowIndex(onStoneBox, row4++);
+            GridPane.setColumnIndex(onStoneBox, 6);
+            grid.getChildren().add(onStoneBox);
+            onBalancingStoneCheckBoxes.add(onStoneBox);
 
 
-        textAreaMatch5One = new TextArea();
-        textAreaMatch5One.setPrefHeight(80);
-        textAreaMatch5One.setMaxWidth(200);
-        textAreaMatch5Two = new TextArea();
-        textAreaMatch5Two.setPrefHeight(80);
-        textAreaMatch5Two.setMaxWidth(200);
-        textAreaMatch5Three = new TextArea();
-        textAreaMatch5Three.setPrefHeight(80);
-        textAreaMatch5Three.setMaxWidth(200);
-
-        GridPane.setRowIndex(textAreaMatch5One, 16);
-        GridPane.setColumnIndex(textAreaMatch5One, 0);
-        GridPane.setRowIndex(textAreaMatch5Two,16);
-        GridPane.setColumnIndex(textAreaMatch5Two, 1);
-        GridPane.setRowIndex(textAreaMatch5Three, 16);
-        GridPane.setColumnIndex(textAreaMatch5Three, 2);
-
-        Label autoLabel5 = new Label("Autonomous:");
-        autoLabel5.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
-        GridPane.setRowIndex(autoLabel5, 15);
-        GridPane.setColumnIndex(autoLabel5, 0);
-        Label teleLabel5 = new Label("TeleOp:");
-        teleLabel5.setFont(Font.font("Tahoma", FontWeight.NORMAL,15));
-        GridPane.setRowIndex(teleLabel5,15);
-        GridPane.setColumnIndex(teleLabel5,1);
-        Label endLabel5 = new Label("End Game:");
-        endLabel5.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
-        GridPane.setRowIndex(endLabel5,15);
-        GridPane.setColumnIndex(endLabel5, 2);
+        }
 
 
-        Label ml5 = new Label("Match 5");
-        GridPane.setRowIndex(ml5, 14);
-        GridPane.setColumnIndex(ml5, 0);
+
+        Label autoLabel = new Label("Autonomous:");
+        autoLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
+        GridPane.setRowIndex(autoLabel, 2);
+        GridPane.setColumnIndex(autoLabel, 0);
+        Label teleLabel = new Label("TeleOp:");
+        teleLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL,15));
+        GridPane.setRowIndex(teleLabel,2);
+        GridPane.setColumnIndex(teleLabel,3);
+        Label endLabel = new Label("End Game:");
+        endLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
+        GridPane.setRowIndex(endLabel,2);
+        GridPane.setColumnIndex(endLabel, 5);
+        grid.getChildren().addAll(autoLabel, teleLabel, endLabel);
 
         // RadioButtons for Rankings
 
@@ -414,7 +331,7 @@ public class Main extends Application {
             RadioButton buttonMatch1 = new RadioButton(Integer.toString(i + 1));
             buttonMatch1.setToggleGroup(rankingMatch1);
             GridPane.setRowIndex(buttonMatch1, 4);
-            GridPane.setColumnIndex(buttonMatch1, i + 3);
+            GridPane.setColumnIndex(buttonMatch1, i + 7);
             grid.getChildren().add(buttonMatch1);
             rankMatch1.add(buttonMatch1);
         }
@@ -424,7 +341,7 @@ public class Main extends Application {
             RadioButton buttonMatch2 = new RadioButton(Integer.toString(i + 1));
             buttonMatch2.setToggleGroup(rankingMatch2);
             GridPane.setRowIndex(buttonMatch2, 7);
-            GridPane.setColumnIndex(buttonMatch2, i + 3);
+            GridPane.setColumnIndex(buttonMatch2, i + 7);
             grid.getChildren().add(buttonMatch2);
             rankMatch2.add(buttonMatch2);
         }
@@ -434,7 +351,7 @@ public class Main extends Application {
             RadioButton buttonMatch3 = new RadioButton(Integer.toString(i + 1));
             buttonMatch3.setToggleGroup(rankingMatch3);
             GridPane.setRowIndex(buttonMatch3, 10);
-            GridPane.setColumnIndex(buttonMatch3, i + 3);
+            GridPane.setColumnIndex(buttonMatch3, i + 7);
             grid.getChildren().add(buttonMatch3);
             rankMatch3.add(buttonMatch3);
         }
@@ -444,7 +361,7 @@ public class Main extends Application {
             RadioButton buttonMatch4 = new RadioButton(Integer.toString(i + 1));
             buttonMatch4.setToggleGroup(rankingMatch4);
             GridPane.setRowIndex(buttonMatch4, 13);
-            GridPane.setColumnIndex(buttonMatch4, i + 3);
+            GridPane.setColumnIndex(buttonMatch4, i + 7);
             grid.getChildren().add(buttonMatch4);
             rankMatch4.add(buttonMatch4);
         }
@@ -454,12 +371,11 @@ public class Main extends Application {
             RadioButton buttonMatch5 = new RadioButton(Integer.toString(i + 1));
             buttonMatch5.setToggleGroup(rankingMatch5);
             GridPane.setRowIndex(buttonMatch5, 16);
-            GridPane.setColumnIndex(buttonMatch5, i + 3);
+            GridPane.setColumnIndex(buttonMatch5, i + 7);
             grid.getChildren().add(buttonMatch5);
             rankMatch5.add(buttonMatch5);
         }
 
-        grid.getChildren().addAll(autoLabel1, teleLabel1, endLabel1, autoLabel2, teleLabel2, endLabel2, autoLabel3, teleLabel3, endLabel3, autoLabel4, teleLabel4, endLabel4, autoLabel5, teleLabel5, endLabel5, textAreaMatch1One, textAreaMatch1Two, textAreaMatch1Three, textAreaMatch2One, textAreaMatch2Two, textAreaMatch2Three, textAreaMatch3One, textAreaMatch3Two, textAreaMatch3Three, textAreaMatch4One,textAreaMatch4Two, textAreaMatch4Three, textAreaMatch5One, textAreaMatch5Two, textAreaMatch5Three, ml1, ml2, ml3, ml4, ml5);
 
 
         //Scene Builder for scene2
@@ -473,21 +389,39 @@ public class Main extends Application {
             if( selectedTeam != null) {
                 teamNameField.setText(selectedTeam.getName());
                 teamNumberField.setText(String.valueOf(selectedTeam.getNumber()));
-                textAreaMatch1One.setText(selectedTeam.getMatch1Auto());
-                textAreaMatch1Two.setText(selectedTeam.getMatch1Tele());
-                textAreaMatch1Three.setText(selectedTeam.getMatch1End());
-                textAreaMatch2One.setText(selectedTeam.getMatch2Auto());
-                textAreaMatch2Two.setText(selectedTeam.getMatch2Tele());
-                textAreaMatch2Three.setText(selectedTeam.getMatch2End());
-                textAreaMatch3One.setText(selectedTeam.getMatch3Auto());
-                textAreaMatch3Two.setText(selectedTeam.getMatch3Tele());
-                textAreaMatch3Three.setText(selectedTeam.getMatch3End());
-                textAreaMatch4One.setText(selectedTeam.getMatch4Auto());
-                textAreaMatch4Two.setText(selectedTeam.getMatch4Tele());
-                textAreaMatch4Three.setText(selectedTeam.getMatch4End());
-                textAreaMatch5One.setText(selectedTeam.getMatch5Auto());
-                textAreaMatch5Two.setText(selectedTeam.getMatch5Tele());
-                textAreaMatch5Three.setText(selectedTeam.getMatch5End());
+                for (int i = 0; i < 5; i++) {
+                    MatchData match = selectedTeam.getMatchDataList().get(i);
+                    CheckBox jewelBox = gotJewelCheckBoxes.get(i);
+                    jewelBox.setSelected(match.getJewel());
+                    CheckBox parkedBox = parkedCheckBoxes.get(i);
+                    parkedBox.setSelected(match.getParked());
+                    TextField autoGlyphBox = autoGlyphsField.get(i);
+                    autoGlyphBox.setText(match.getAutoGlyphsInBox());
+                    CheckBox keyBox = keyCheckBoxes.get(i);
+                    keyBox.setSelected(match.getKey());
+                    TextField teleGlyphField = teleGlyphsField.get(i);
+                    teleGlyphField.setText(match.getTeleGlyphsInBox());
+                    TextField rowsField = numberofRowsField.get(i);
+                    rowsField.setText(match.getRows());
+                    TextField colunmsField = numberofColunmsField.get(i);
+                    colunmsField.setText(match.getColunms());
+                    CheckBox cipherBox = cipherCheckBoxes.get(i);
+                    cipherBox.setSelected(match.getCipher());
+                    RadioButton notPlacedButton = notPlacedRadioButtons.get(i);
+                    notPlacedButton.setSelected(match.getNotPlaced());
+                    RadioButton zone1Button = zone1RadioButtons.get(i);
+                    zone1Button.setSelected(match.getZone1());
+                    RadioButton zone2Button = zone2RadioButtons.get(i);
+                    zone2Button.setSelected(match.getZone2());
+                    RadioButton zone3Button = zone3RadioButtons.get(i);
+                    zone3Button.setSelected(match.getZone3());
+                    CheckBox relicUprightBox = relicUprightCheckBoxes.get(i);
+                    relicUprightBox.setSelected(match.getRelicUp());
+                    CheckBox onStoneBox = onBalancingStoneCheckBoxes.get(i);
+                    onStoneBox.setSelected(match.getOnStone());
+                }
+
+
                 RadioButton match1Button = rankMatch1.get(selectedTeam.getMatch1Rank()-1);
                 match1Button.setSelected(true);
                 RadioButton match2Button = rankMatch2.get(selectedTeam.getMatch2Rank()-1);
